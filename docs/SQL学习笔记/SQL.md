@@ -118,7 +118,7 @@
 ```sql
 2、select id,username from emp;
 ```
-<img src="D:\GitHub\youhui2411.github.io\docs\SQL学习笔记\SQL.assets\image-20200713161433971.png" alt="image-20200713161433971" style="zoom:50%;" />
+<img src="image/image-20200713161433971.png" alt="image-20200713161433971" style="zoom:50%;" />
 
 ##### 2、使用算术表达式
 
