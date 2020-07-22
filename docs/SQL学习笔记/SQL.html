@@ -200,20 +200,23 @@
 <p>5、属性名：列名称（字段名）</p>
 <p>6、主键：唯一确定元组的属性组（关键字）</p>
 <p>7、域：属性的取值范围</p>
-<p><img src="image/image-20200713161008801.png" alt="image-20200713161008801"></p>
+<img src="image/image-20200713161008801.png" alt="image-20200713161008801" style="zoom: 50%;" />
+
 <h2 id="五、sql语句">五、SQL语句</h2>
 <h3 id="一、select语句">一、select语句</h3>
 <h4 id="一、select子句">一、select子句</h4>
 <h5 id="1、最简单的查询方式">1、最简单的查询方式</h5>
 <pre><code class="language-sql">1、select * from emp;</code></pre>
-<p><img src="image/image-20200713161402197.png" alt="image-20200713161402197"></p>
+<img src="image/image-20200713161402197.png" alt="image-20200713161402197" style="zoom:50%;" />
+
 <pre><code class="language-sql">2、select id,username from emp;</code></pre>
-<p>L
-<img src="image/image-20200713161433971.png" alt="image-20200713161433971"></p>
+<img src="D:\GitHub\youhui2411.github.io\docs\SQL学习笔记\SQL.assets\image-20200713161433971.png" alt="image-20200713161433971" style="zoom:50%;" />
+
 <h5 id="2、使用算术表达式">2、使用算术表达式</h5>
 <h5 id="3、使用字段别名">3、使用字段别名</h5>
 <pre><code class="language-sql">1、select id as &quot;员工编号&quot;,username &quot;员工姓名&quot; from emp;</code></pre>
-<p><img src="image/image-20200713161551813.png" alt="image-20200713161551813"></p>
+<img src="image/image-20200713161551813.png" alt="image-20200713161551813" style="zoom:50%;" />
+
 <p>字段别名:</p>
 <p>1、重命名查询结果中的字段，以增强可读性</p>
 <p>2、别名如果含有空格或其他特殊字符或大小写敏感，需用双引号引起来</p>
@@ -221,52 +224,66 @@
 <h5 id="4、去除重复行">4、去除重复行</h5>
 <p>缺写情况下，查询结果中包含所有符合条件的记录行，包括重复行</p>
 <pre><code class="language-sql">1、select username from emp;</code></pre>
-<p><img src="image/image-20200713161716806.png" alt="image-20200713161716806"></p>
+<img src="image/image-20200713161716806.png" alt="image-20200713161716806" style="zoom:50%;" />
+
 <p>使用DISTINCT关键字可从查询结果中清除重复行</p>
 <pre><code class="language-sql">2、select distinct username from emp;</code></pre>
-<p><img src="image/image-20200713161745241.png" alt="image-20200713161745241"></p>
+<img src="image/image-20200713161745241.png" alt="image-20200713161745241" style="zoom:50%;" />
+
 <p><strong>注</strong>：DISTINCT的作用范围是后面所有字段的组合</p>
 <h4 id="二、order-by子句">二、order by子句</h4>
 <p>使用order by 子句对查询结果进行排序</p>
 <p>排序方式包括升序（asc，缺写）和降序（desc）两种：</p>
 <pre><code class="language-sql">1、select username,userage from emp order by userage;</code></pre>
-<p><img src="image/image-20200713162002949.png" alt="image-20200713162002949"></p>
+<img src="image/image-20200713162002949.png" alt="image-20200713162002949" style="zoom:50%;" />
+
 <pre><code class="language-sql">2、select username,userage from emp order by userage desc;</code></pre>
-<p><img src="image/image-20200713162030399.png" alt="image-20200713162030399"></p>
+<img src="image/image-20200713162030399.png" alt="image-20200713162030399" style="zoom:50%;" />
+
 <p>按多字段排序</p>
 <pre><code class="language-sql">1、select username,userage from emp order by id,userage;</code></pre>
-<p><img src="image/image-20200713162114990.png" alt="image-20200713162114990"></p>
+<img src="image/image-20200713162114990.png" alt="image-20200713162114990" style="zoom:50%;" />
+
 <h4 id="三、where子句">三、where子句</h4>
 <h5 id="一、指定查询条件使用where子句">一、指定查询条件使用where子句</h5>
 <pre><code class="language-sql">1、    select * from emp where id=1;</code></pre>
-<p><img src="image/image-20200713174220976.png" alt="image-20200713174220976"></p>
+<img src="image/image-20200713174220976.png" alt="image-20200713174220976" style="zoom:50%;" />
+
 <pre><code class="language-sql">2、    select * from emp where username = &#39;张三&#39;;</code></pre>
-<p><img src="image/image-20200713174226982.png" alt="image-20200713174226982"></p>
+<img src="image/image-20200713174226982.png" alt="image-20200713174226982" style="zoom:50%;" />
+
 <p><strong>注</strong>：</p>
 <p>字符串和日期值要用单引号扩起来         </p>
 <p>字符串大小写敏感</p>
 <p>日期值格式敏感，缺写的日期格式是&#39;DD-MON-RR‘</p>
 <h5 id="二、查询条件中可以使用比较运算符">二、查询条件中可以使用比较运算符</h5>
 <pre><code class="language-sql">1、    select * from emp where userage &gt; 20;</code></pre>
-<p><img src="image/image-20200713174335263.png" alt="image-20200713174335263"></p>
+<img src="image/image-20200713174335263.png" alt="image-20200713174335263" style="zoom:50%;" />
+
 <pre><code class="language-sql">2、select * from emp where userage &lt;&gt; 20;</code></pre>
-<p><img src="image/image-20200713174405145.png" alt="image-20200713174405145"></p>
+<img src="image/image-20200713174405145.png" alt="image-20200713174405145" style="zoom:50%;" />
+
 <pre><code class="language-sql">3、    select * from emp where userage between 19 and 21;</code></pre>
-<p><img src="image/image-20200713174442704.png" alt="image-20200713174442704"></p>
-<p><img src="image/image-20200713174458180.png" alt="image-20200713174458180"></p>
+<img src="image/image-20200713174442704.png" alt="image-20200713174442704" style="zoom:50%;" />
+
+<img src="image/image-20200713174458180.png" alt="image-20200713174458180" style="zoom:50%;" />
+
 <h5 id="三、使用like运算符执行模糊查询（通配查询）">三、使用LIKE运算符执行模糊查询（通配查询）</h5>
 <p>% 表示零或多个字符    _ 表示一个字符</p>
 <p>对于特殊符号可使用ESCAPE 标识符来查找</p>
 <pre><code class="language-sql">1、    select * from emp where username like &#39;李%&#39;;</code></pre>
-<p><img src="image/image-20200713174608895.png" alt="image-20200713174608895"></p>
+<img src="image/image-20200713174608895.png" alt="image-20200713174608895" style="zoom:50%;" />
+
 <p>查询条件中可以使用逻辑运算符</p>
 <pre><code class="language-sql">2、select * from emp where userage &gt; 19 and username = &#39;张三&#39;;</code></pre>
-<p><img src="image/image-20200713174639952.png" alt="image-20200713174639952"></p>
+<img src="image/image-20200713174639952.png" alt="image-20200713174639952" style="zoom:50%;" />
+
 <p>SQL优化问题：</p>
 <p>AND: 把检索结果较少的条件放到后面</p>
 <p>OR: 把检索结果较多的条件放到后面</p>
 <p><strong>注</strong>：共计四种运算符：算术&gt;连接&gt;比较&gt;逻辑</p>
-<p><img src="image/image-20200713174734328.png" alt="image-20200713174734328"></p>
+<img src="image/image-20200713174734328.png" alt="image-20200713174734328" style="zoom:50%;" />
+
 <h4 id="四、使用函数">四、使用函数</h4>
 <p>作用：</p>
 <p>1、使用函数可以大大提高SELECT语句操作数据库的能力</p>
@@ -383,11 +400,13 @@
 <p>(2) count(exp)返回表达式exp值非空的记录数目；</p>
 <p>(3) count(distinct(exp))返回表达式exp值不重复的、非空的记录数目。</p>
 <pre><code class="language-sql">select count(*) from emp;</code></pre>
-<p><img src="image/image-20200713175150186.png" alt="image-20200713175150186"></p>
+<img src="image/image-20200713175150186.png" alt="image-20200713175150186" style="zoom:50%;" />
+
 <h4 id="五、group-by子句">五、group by子句</h4>
 <p>GROUP BY 子句将表中数据分成若干小组</p>
 <pre><code class="language-sql">select username, avg(userage) from emp group by username;</code></pre>
-<p><img src="image/image-20200713175231297.png" alt="image-20200713175231297"></p>
+<img src="image/image-20200713175231297.png" alt="image-20200713175231297" style="zoom:50%;" />
+
 <p><strong>注</strong>：</p>
 <p>1、出现在SELECT列表中的字段，如果不是包含在多行函数中，那么该字段必须同时在GROUP BY子句中出现</p>
 <p>2、包含在GROUP BY子句中的字段则不必须出现在SELECT列表中     </p>
@@ -396,7 +415,8 @@
 <h4 id="六、having子句">六、having子句</h4>
 <p>Having子句对分组查询的结果进行过滤</p>
 <pre><code class="language-sql">select username, min(userage) from emp group by username having min(userage&lt;21);</code></pre>
-<p><img src="image/image-20200713175328882.png" alt="image-20200713175328882"></p>
+<img src="image/image-20200713175328882.png" alt="image-20200713175328882" style="zoom:50%;" />
+
 <p><strong>注</strong>：</p>
 <p>1、having从句过滤分组后的结果，它只能出现在group by从句之后，而where从句要出现在group by从句之前。</p>
 <p>2、where过滤行，having过滤分组。having支持所有where操作符。</p>
@@ -405,12 +425,15 @@
 <p>一次插入操作只插入一行</p>
 <p>1、可以添加所有列，此处插入的元组中列的个数、顺序与emp的结构完全一致，因此表名之后的列名可以省略不写</p>
 <pre><code class="language-sql">insert into emp values (default,&#39;小叶&#39;,20);</code></pre>
-<p><img src="image/image-20200713175500920.png" alt="image-20200713175500920"></p>
+<img src="image/image-20200713175500920.png" alt="image-20200713175500920" style="zoom:50%;" />
+
 <p>2、 也可以只添加部分列</p>
 <pre><code class="language-sql">insert into emp(id,userage) values (default,22);</code></pre>
-<p><img src="image/image-20200713175535536.png" alt="image-20200713175535536"></p>
+<img src="image/image-20200713175535536.png" alt="image-20200713175535536" style="zoom:50%;" />
+
 <p>表中数据：</p>
-<p><img src="image/image-20200713175550164.png" alt="image-20200713175550164"></p>
+<img src="image/image-20200713175550164.png" alt="image-20200713175550164" style="zoom:50%;" />
+
 <p><strong>注</strong>：</p>
 <p>要求省略的列必须满足下面的条件：</p>
 <p>1、该列定义为允许Null值。</p>
@@ -418,24 +441,29 @@
 <h3 id="三、update语句">三、update语句</h3>
 <p>修改基本表中元组的某些列的语句是update语句</p>
 <pre><code class="language-sql">update emp set userage=18 where username=&#39;小叶&#39;;</code></pre>
-<p><img src="image/image-20200713175651969.png" alt="image-20200713175651969"></p>
+<img src="image/image-20200713175651969.png" alt="image-20200713175651969" style="zoom:50%;" />
+
 <p>其语义是：修改基本表中满足条件表达式的那些元组的列值，需修改的列值在set子句中指出。</p>
 <h3 id="四、delete语句">四、delete语句</h3>
 <p>从基本表中删除元组的语句是delete语句</p>
 <pre><code class="language-sql">delete from emp where username=&#39;小叶&#39;;</code></pre>
-<p><img src="image/image-20200713175736668.png" alt="image-20200713175736668"></p>
+<img src="image/image-20200713175736668.png" alt="image-20200713175736668" style="zoom:50%;" />
+
 <h2 id="六、多表连接查询">六、多表连接查询</h2>
 <p>概念：根据两个表或多个表的列之间的关系，从这些表中查询数据。</p>
 <p>目的：实现多个表查询操作。</p>
 <p>emp_info表：</p>
-<p><img src="image/image-20200713175816527.png" alt="image-20200713175816527"></p>
+<img src="image/image-20200713175816527.png" alt="image-20200713175816527" style="zoom:50%;" />
+
 <p>Emp_salary表：</p>
-<p><img src="image/image-20200713175831108.png" alt="image-20200713175831108"></p>
+<img src="image/image-20200713175831108.png" alt="image-20200713175831108" style="zoom:50%;" />
+
 <h3 id="一、交叉连接">一、交叉连接</h3>
 <p>1、CROSS JOIN产生了一个笛卡尔集，其效果等同于在两个表进行连接时未使用WHERE子句限定连接条件;</p>
 <p>2、可以使用where条件从笛卡尔集中选出满足条件的记录。</p>
 <pre><code class="language-sql">select username,userage,emp_salary.salary from emp_info cross join emp_salary where emp_info.tid = emp_salary.tid;</code></pre>
-<p><img src="image/image-20200713175921303.png" alt="image-20200713175921303"></p>
+<img src="image/image-20200713175921303.png" alt="image-20200713175921303" style="zoom:50%;" />
+
 <h3 id="二、自然连接">二、自然连接</h3>
 <p>1、NATURAL JOIN基于两个表中的全部同名列建立连接</p>
 <p>2、从两个表中选出同名列的值均对应相等的所有行</p>
@@ -443,41 +471,49 @@
 <p>4、不允许在参照列上使用表名或者别名作为前缀</p>
 <p>5、自然连接的结果不保留重复的属性</p>
 <pre><code class="language-sql">select username,userage,salary from emp_info natural join emp_salary;</code></pre>
-<p><img src="image/image-20200713175954345.png" alt="image-20200713175954345"></p>
+<img src="image/image-20200713175954345.png" alt="image-20200713175954345" style="zoom:50%;" />
+
 <h3 id="三、using连接">三、Using连接</h3>
 <p>1、如果不希望参照被连接表的所有同名列进行等值连接，自然连接将无法满足要求，可以在连接时使用USING子句来设置用于等值连接的列（参照列）名。</p>
 <p>2、using子句引用的列在sql任何地方不能使用表名或者别名做前缀</p>
 <pre><code class="language-sql">select ei.username,ei.userage,tid,es.salary from emp_info ei join emp_salary es using(tid);</code></pre>
-<p><img src="image/image-20200713180036112.png" alt="image-20200713180036112"></p>
+<img src="image/image-20200713180036112.png" alt="image-20200713180036112" style="zoom:50%;" />
+
 <h3 id="四、on连接">四、On连接</h3>
 <p>1、自然连接的条件是基于表中所有同名列的等值连接</p>
 <p>2、为了设置任意的连接条件或者指定连接的列，需要使用ON子句</p>
 <p>3、连接条件与其它的查询条件分开书写</p>
 <p>4、使用ON 子句使查询语句更容易理解</p>
 <pre><code class="language-sql">select username,userage,salary from emp_info join emp_salary on emp_info.tid = emp_salary.tid;</code></pre>
-<p><img src="image/image-20200713180124757.png" alt="image-20200713180124757"></p>
+<img src="image/image-20200713180124757.png" alt="image-20200713180124757" style="zoom:50%;" />
+
 <h3 id="五、外连接">五、外连接</h3>
 <h4 id="一、左外联接">一、左外联接</h4>
 <p>两个表在连接过程中除返回满足连接条件的行以外，还返回左表中不满足条件的行，这种连接称为左外联接。</p>
 <pre><code class="language-sql">select username,userage,salary from emp_info left join emp_salary on emp_info.tid = emp_salary.tid;</code></pre>
-<p><img src="image/image-20200713180211923.png" alt="image-20200713180211923"></p>
+<img src="image/image-20200713180211923.png" alt="image-20200713180211923" style="zoom:50%;" />
+
 <h4 id="二、右外联接">二、右外联接</h4>
 <p>两个表在连接过程中除返回满足连接条件的行以外，还返回右表中不满足条件的行，这种连接称为右外联接。</p>
 <pre><code class="language-sql">select username,userage,salary from emp_info right join emp_salary on emp_info.tid = emp_salary.tid;</code></pre>
-<p><img src="image/image-20200713180246331.png" alt="image-20200713180246331"></p>
+<img src="image/image-20200713180246331.png" alt="image-20200713180246331" style="zoom:50%;" />
+
 <h4 id="三、满外联接">三、满外联接</h4>
 <p>两个表在连接过程中除返回满足连接条件的行以外，还返回两个表中不满足条件的所有行，这种连接称为满外联接。</p>
 <pre><code class="language-sql">select username,userage,salary from emp_info full join emp_salary using(tid);</code></pre>
-<p><img src="image/image-20200713180325932.png" alt="image-20200713180325932"></p>
+<img src="image/image-20200713180325932.png" alt="image-20200713180325932" style="zoom:50%;" />
+
 <h3 id="六、自连接">六、自连接</h3>
 <p>将表连接到自身时的连接称为自连接。</p>
 <pre><code class="language-sql">select e.id,m.username,m.userage from emp_info e left join emp_info m on e.id=m.id;</code></pre>
-<p><img src="image/image-20200713180357650.png" alt="image-20200713180357650"></p>
+<img src="image/image-20200713180357650.png" alt="image-20200713180357650" style="zoom:50%;" />
+
 <h2 id="七、子查询">七、子查询</h2>
 <p>嵌套在其他查询中的查询叫做子查询</p>
 <p>1、如查询表中比“李四“年龄大的记录，</p>
 <pre><code class="language-sql">select * from emp_info where userage &gt; (select userage from emp_info where username = &#39;李四&#39;);</code></pre>
-<p><img src="image/image-20200713180432954.png" alt="image-20200713180432954"></p>
+<img src="image/image-20200713180432954.png" alt="image-20200713180432954" style="zoom:50%;" />
+
 <p><strong>注</strong>：</p>
 <p>1、在查询是基于未知值时应考虑使用子查询</p>
 <p>2、子查询必须包含在括号内   </p>

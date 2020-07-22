@@ -99,7 +99,7 @@
 
 7、域：属性的取值范围
 
-![image-20200713161008801](image/image-20200713161008801.png)
+<img src="image/image-20200713161008801.png" alt="image-20200713161008801" style="zoom: 50%;" />
 
 ## 五、SQL语句
 
@@ -113,13 +113,12 @@
 1、select * from emp;
 ```
 
-![image-20200713161402197](image/image-20200713161402197.png)
+<img src="image/image-20200713161402197.png" alt="image-20200713161402197" style="zoom:50%;" />
 
 ```sql
 2、select id,username from emp;
 ```
-L
-![image-20200713161433971](image/image-20200713161433971.png)
+<img src="D:\GitHub\youhui2411.github.io\docs\SQL学习笔记\SQL.assets\image-20200713161433971.png" alt="image-20200713161433971" style="zoom:50%;" />
 
 ##### 2、使用算术表达式
 
@@ -129,7 +128,7 @@ L
 1、select id as "员工编号",username "员工姓名" from emp;
 ```
 
-![image-20200713161551813](image/image-20200713161551813.png)
+<img src="image/image-20200713161551813.png" alt="image-20200713161551813" style="zoom:50%;" />
 
 字段别名:
 
@@ -147,7 +146,7 @@ L
 1、select username from emp;
 ```
 
-![image-20200713161716806](image/image-20200713161716806.png)
+<img src="image/image-20200713161716806.png" alt="image-20200713161716806" style="zoom:50%;" />
 
 使用DISTINCT关键字可从查询结果中清除重复行
 
@@ -155,7 +154,7 @@ L
 2、select distinct username from emp;
 ```
 
-![image-20200713161745241](image/image-20200713161745241.png)
+<img src="image/image-20200713161745241.png" alt="image-20200713161745241" style="zoom:50%;" />
 
 **注**：DISTINCT的作用范围是后面所有字段的组合
 
@@ -169,13 +168,13 @@ L
 1、select username,userage from emp order by userage;
 ```
 
-![image-20200713162002949](image/image-20200713162002949.png)
+<img src="image/image-20200713162002949.png" alt="image-20200713162002949" style="zoom:50%;" />
 
 ```sql
 2、select username,userage from emp order by userage desc;
 ```
 
-![image-20200713162030399](image/image-20200713162030399.png)
+<img src="image/image-20200713162030399.png" alt="image-20200713162030399" style="zoom:50%;" />
 
 按多字段排序
 
@@ -183,7 +182,7 @@ L
 1、select username,userage from emp order by id,userage;
 ```
 
-![image-20200713162114990](image/image-20200713162114990.png)
+<img src="image/image-20200713162114990.png" alt="image-20200713162114990" style="zoom:50%;" />
 
 #### 三、where子句
 
@@ -193,13 +192,13 @@ L
 1、	select * from emp where id=1;
 ```
 
-![image-20200713174220976](image/image-20200713174220976.png)
+<img src="image/image-20200713174220976.png" alt="image-20200713174220976" style="zoom:50%;" />
 
 ```sql
 2、	select * from emp where username = '张三';
 ```
 
-![image-20200713174226982](image/image-20200713174226982.png)
+<img src="image/image-20200713174226982.png" alt="image-20200713174226982" style="zoom:50%;" />
 
 **注**：
 
@@ -215,21 +214,21 @@ L
 1、	select * from emp where userage > 20;
 ```
 
-![image-20200713174335263](image/image-20200713174335263.png)
+<img src="image/image-20200713174335263.png" alt="image-20200713174335263" style="zoom:50%;" />
 
 ```sql
 2、select * from emp where userage <> 20;
 ```
 
-![image-20200713174405145](image/image-20200713174405145.png)
+<img src="image/image-20200713174405145.png" alt="image-20200713174405145" style="zoom:50%;" />
 
 ```sql
 3、	select * from emp where userage between 19 and 21;
 ```
 
-![image-20200713174442704](image/image-20200713174442704.png)
+<img src="image/image-20200713174442704.png" alt="image-20200713174442704" style="zoom:50%;" />
 
-![image-20200713174458180](image/image-20200713174458180.png)
+<img src="image/image-20200713174458180.png" alt="image-20200713174458180" style="zoom:50%;" />
 
 ##### 三、使用LIKE运算符执行模糊查询（通配查询）
 
@@ -241,7 +240,7 @@ L
 1、	select * from emp where username like '李%';
 ```
 
-![image-20200713174608895](image/image-20200713174608895.png)
+<img src="image/image-20200713174608895.png" alt="image-20200713174608895" style="zoom:50%;" />
 
 查询条件中可以使用逻辑运算符
 
@@ -249,7 +248,7 @@ L
 2、select * from emp where userage > 19 and username = '张三';
 ```
 
-![image-20200713174639952](image/image-20200713174639952.png)
+<img src="image/image-20200713174639952.png" alt="image-20200713174639952" style="zoom:50%;" />
 
 SQL优化问题：
 
@@ -259,7 +258,7 @@ OR: 把检索结果较多的条件放到后面
 
 **注**：共计四种运算符：算术>连接>比较>逻辑
 
-![image-20200713174734328](image/image-20200713174734328.png)
+<img src="image/image-20200713174734328.png" alt="image-20200713174734328" style="zoom:50%;" />
 
 #### 四、使用函数
 
@@ -312,7 +311,7 @@ OR: 把检索结果较多的条件放到后面
 select count(*) from emp;
 ```
 
-![image-20200713175150186](image/image-20200713175150186.png)
+<img src="image/image-20200713175150186.png" alt="image-20200713175150186" style="zoom:50%;" />
 
 #### 五、group by子句
 
@@ -322,7 +321,7 @@ GROUP BY 子句将表中数据分成若干小组
 select username, avg(userage) from emp group by username;
 ```
 
-![image-20200713175231297](image/image-20200713175231297.png)
+<img src="image/image-20200713175231297.png" alt="image-20200713175231297" style="zoom:50%;" />
 
 **注**：
 
@@ -342,7 +341,7 @@ Having子句对分组查询的结果进行过滤
 select username, min(userage) from emp group by username having min(userage<21);
 ```
 
-![image-20200713175328882](image/image-20200713175328882.png)
+<img src="image/image-20200713175328882.png" alt="image-20200713175328882" style="zoom:50%;" />
 
 **注**：
 
@@ -362,7 +361,7 @@ select username, min(userage) from emp group by username having min(userage<21);
 insert into emp values (default,'小叶',20);
 ```
 
-![image-20200713175500920](image/image-20200713175500920.png)
+<img src="image/image-20200713175500920.png" alt="image-20200713175500920" style="zoom:50%;" />
 
 2、 也可以只添加部分列
 
@@ -370,11 +369,11 @@ insert into emp values (default,'小叶',20);
 insert into emp(id,userage) values (default,22);
 ```
 
-![image-20200713175535536](image/image-20200713175535536.png)
+<img src="image/image-20200713175535536.png" alt="image-20200713175535536" style="zoom:50%;" />
 
 表中数据：
 
-![image-20200713175550164](image/image-20200713175550164.png)
+<img src="image/image-20200713175550164.png" alt="image-20200713175550164" style="zoom:50%;" />
 
 **注**：
 
@@ -392,7 +391,7 @@ insert into emp(id,userage) values (default,22);
 update emp set userage=18 where username='小叶';
 ```
 
-![image-20200713175651969](image/image-20200713175651969.png)
+<img src="image/image-20200713175651969.png" alt="image-20200713175651969" style="zoom:50%;" />
 
 其语义是：修改基本表中满足条件表达式的那些元组的列值，需修改的列值在set子句中指出。
 
@@ -404,7 +403,7 @@ update emp set userage=18 where username='小叶';
 delete from emp where username='小叶';
 ```
 
-![image-20200713175736668](image/image-20200713175736668.png)
+<img src="image/image-20200713175736668.png" alt="image-20200713175736668" style="zoom:50%;" />
 
 ## 六、多表连接查询
 
@@ -414,11 +413,11 @@ delete from emp where username='小叶';
 
 emp_info表：
 
-![image-20200713175816527](image/image-20200713175816527.png)
+<img src="image/image-20200713175816527.png" alt="image-20200713175816527" style="zoom:50%;" />
 
 Emp_salary表：
 
-![image-20200713175831108](image/image-20200713175831108.png)
+<img src="image/image-20200713175831108.png" alt="image-20200713175831108" style="zoom:50%;" />
 
 ### 一、交叉连接
 
@@ -430,7 +429,7 @@ Emp_salary表：
 select username,userage,emp_salary.salary from emp_info cross join emp_salary where emp_info.tid = emp_salary.tid;
 ```
 
-![image-20200713175921303](image/image-20200713175921303.png)
+<img src="image/image-20200713175921303.png" alt="image-20200713175921303" style="zoom:50%;" />
 
 ### 二、自然连接
 
@@ -448,7 +447,7 @@ select username,userage,emp_salary.salary from emp_info cross join emp_salary wh
 select username,userage,salary from emp_info natural join emp_salary;
 ```
 
-![image-20200713175954345](image/image-20200713175954345.png)
+<img src="image/image-20200713175954345.png" alt="image-20200713175954345" style="zoom:50%;" />
 
 ### 三、Using连接
 
@@ -460,7 +459,7 @@ select username,userage,salary from emp_info natural join emp_salary;
 select ei.username,ei.userage,tid,es.salary from emp_info ei join emp_salary es using(tid);
 ```
 
-![image-20200713180036112](image/image-20200713180036112.png)
+<img src="image/image-20200713180036112.png" alt="image-20200713180036112" style="zoom:50%;" />
 
 ### 四、On连接
 
@@ -476,7 +475,7 @@ select ei.username,ei.userage,tid,es.salary from emp_info ei join emp_salary es 
 select username,userage,salary from emp_info join emp_salary on emp_info.tid = emp_salary.tid;
 ```
 
-![image-20200713180124757](image/image-20200713180124757.png)
+<img src="image/image-20200713180124757.png" alt="image-20200713180124757" style="zoom:50%;" />
 
 ### 五、外连接
 
@@ -488,7 +487,7 @@ select username,userage,salary from emp_info join emp_salary on emp_info.tid = e
 select username,userage,salary from emp_info left join emp_salary on emp_info.tid = emp_salary.tid;
 ```
 
-![image-20200713180211923](image/image-20200713180211923.png)
+<img src="image/image-20200713180211923.png" alt="image-20200713180211923" style="zoom:50%;" />
 
 #### 二、右外联接
 
@@ -498,7 +497,7 @@ select username,userage,salary from emp_info left join emp_salary on emp_info.ti
 select username,userage,salary from emp_info right join emp_salary on emp_info.tid = emp_salary.tid;
 ```
 
-![image-20200713180246331](image/image-20200713180246331.png)
+<img src="image/image-20200713180246331.png" alt="image-20200713180246331" style="zoom:50%;" />
 
 #### 三、满外联接
 
@@ -508,7 +507,7 @@ select username,userage,salary from emp_info right join emp_salary on emp_info.t
 select username,userage,salary from emp_info full join emp_salary using(tid);
 ```
 
-![image-20200713180325932](image/image-20200713180325932.png)
+<img src="image/image-20200713180325932.png" alt="image-20200713180325932" style="zoom:50%;" />
 
 ### 六、自连接
 
@@ -518,7 +517,7 @@ select username,userage,salary from emp_info full join emp_salary using(tid);
 select e.id,m.username,m.userage from emp_info e left join emp_info m on e.id=m.id;
 ```
 
-![image-20200713180357650](image/image-20200713180357650.png)
+<img src="image/image-20200713180357650.png" alt="image-20200713180357650" style="zoom:50%;" />
 
 ## 七、子查询
 
@@ -530,7 +529,7 @@ select e.id,m.username,m.userage from emp_info e left join emp_info m on e.id=m.
 select * from emp_info where userage > (select userage from emp_info where username = '李四');
 ```
 
-![image-20200713180432954](image/image-20200713180432954.png)
+<img src="image/image-20200713180432954.png" alt="image-20200713180432954" style="zoom:50%;" />
 
 **注**：
 

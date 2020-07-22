@@ -10,18 +10,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chengyuan1216/chengyuan1216.github.io.git"
+    "url": "git+https://github.com/youhui2411/youhui2411.github.io.git"
   },
   "keywords": [
     "javascript",
     "java"
   ],
-  "author": "liuchengyuan",
+  "author": "yeyouhui",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chengyuan1216/chengyuan1216.github.io/issues"
+    "url": "https://github.com/youhui2411/youhui2411.github.io/issues"
   },
-  "homepage": "https://github.com/chengyuan1216/chengyuan1216.github.io#readme",
+  "homepage": "https://github.com/youhui2411/youhui2411.github.io#readme",
   "devDependencies": {
     "ejs": "^2.7.1",
     "highlight": "^0.2.4",

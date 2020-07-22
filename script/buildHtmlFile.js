@@ -29,7 +29,7 @@ function transformAllMd2Html() {
 }
 
 function createIndexHtml() {
-  const baseUrl = 'https://github.com/chengyuan1216/chengyuan1216.github.io/blob/master/docs/'
+  const baseUrl = 'https://github.com/youhui2411/youhui2411.github.io/blob/master/docs/'
   const rootDir = path.resolve(process.cwd(), 'docs')
   let htmlStr = `<ul>`
   build(rootDir)
@@ -41,7 +41,7 @@ function createIndexHtml() {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>liuchengyuan</title>
+    <title>yeyouhui</title>
     <style>
       ul {
         font-size: 16px;
