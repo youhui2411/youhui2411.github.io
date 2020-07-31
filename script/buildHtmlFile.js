@@ -47,11 +47,17 @@ function createIndexHtml() {
         font-size: 16px;
         font-weight: 700;
         color: #333;
+        list-style-type: none;
       }
       li {
         margin: 10px 0;
         font-size:14px;
         font-weight: normal;
+      }
+      a {
+        text-decoration:none;
+        font-size: 24px;
+        color: blue;
       }
     </style>
   </head>
