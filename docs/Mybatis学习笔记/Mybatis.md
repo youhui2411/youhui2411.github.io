@@ -353,12 +353,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 1、在tomcat中启动项目，并在浏览器地址栏中输入***http://localhost:8080/book/show***，可以看到如下图：
 
-![image-20200731160018376](\image\image-20200731160018376.png)
+![image-20200731160018376](image\image-20200731160018376.png)
 
 2、添加书籍信息：
 
-![image-20200731160038204](\image\image-20200731160038204.png)
+![image-20200731160038204](image\image-20200731160038204.png)
 
 3、添加书籍信息后，如图：
 
-![image-20200731160054196](\image\image-20200731160054196.png)
+![image-20200731160054196](image\image-20200731160054196.png)

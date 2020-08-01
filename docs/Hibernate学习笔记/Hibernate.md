@@ -18,7 +18,7 @@ Hibernate就是一个持久层的ORM（Object Relational Mapping，对象关系�
 
 ### 一、导入jar包
 
-![](\image\捕获1.PNG)
+![](image/1.PNG)
 
 ### 二、创建实体类
 
@@ -173,7 +173,7 @@ public class User {
 
 ### 五、运行结果
 
-![](\image\捕获2.PNG)
+![](image/2.PNG)
 
 
 
