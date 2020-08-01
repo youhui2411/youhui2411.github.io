@@ -54,11 +54,6 @@ function createIndexHtml() {
         font-size:14px;
         font-weight: normal;
       }
-      a {
-        text-decoration:none;
-        font-size: 24px;
-        color: blue;
-      }
     </style>
   </head>
   <body>
