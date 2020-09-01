@@ -177,7 +177,7 @@ public class User {
 
 
 
-### 六、Hibernate几个核心类
+## 四、Hibernate几个核心类
 
 #### 一、Configuration
 
@@ -235,5 +235,200 @@ public class HibernateUtils {
 
 #### 四、Transaction
 
-事务对象
+事务的四个特性：原子性、一致性、隔离性、持久性
+
+## 五、实体类编写规则
+
+1 、实体类里面属性私有的
+
+2 、私有属性使用公开的set和get方法操作
+
+3、 要求实体类有属性作为唯一值（一般使用id值）
+
+4 、实体类属性建议不使用基本数据类型，而使用基本数据类型对应的包装类
+
+| 基本数据类型 | 对应的包装类 |
+| ------------ | ------------ |
+| int          | Integer      |
+| char         | Character    |
+| boolean      | Boolean      |
+| float        | Float        |
+| double       | Double       |
+| short        | Short        |
+| long         | Long         |
+| byte         | Byte         |
+
+## 六、Hibernate主键生成策略
+
+Hibernate要求实体类里面有一个属性作为唯一值，对应表的主键，主键可以有不同的生成策略，
+
+![](image/3.PNG)
+
+## 七、CRUD操作
+
+### 一、添加
+
+```java
+User user = new User();
+user.setUsername("小刘");
+user.setPassword("111");
+user.setAddress("Japan");
+
+session.save(user);
+```
+
+### 二、根据id查询
+
+```java
+User user = session.get(User.class,1);
+```
+
+### 三、修改
+
+```java
+User user = session.get(User.class,1);
+user.setUsername("小王");
+        
+session.update(user);
+```
+
+### 四、删除
+
+```java
+User user = session.get(User.class,1);
+
+session.delete(user);
+```
+
+## 八、实体类对象状态
+
+1、瞬时态（对象里面没有id值，对象与session没有关联）
+
+```java
+User user = new User();
+user.setUsername("小刘");
+user.setPassword("111");
+user.setAddress("Japan");
+```
+
+2、持久态（对象里面有id值，对象与session关联）
+
+```java
+User user = session.get(User.class,1);
+```
+
+3、托管态（对象有id值，对象与session没有关联）
+
+```java
+User user = new User();
+user.setId(1);
+```
+
+**注**：
+
+saveOrUpdate方法在实体类为瞬时态时做添加操作，托管态和持久态时做修改操作
+
+## 九、Hibernate缓存
+
+### 一、Hibernate缓存特点
+
+#### 一、Hibernate的一级缓存
+
+(1）Hibernate的一级缓存默认打开的
+
+(2）Hibernate的一级缓存使用范围，是Session范围，从Session创建到Session关闭范围
+
+(3）Hibernate的一级缓存中，存储数据必须 持久态数据
+
+***Hibernate一级缓存特性：持久态自动更新数据库***
+
+#### 二、Hibernate的二级缓存
+
+(1）目前已经不使用了，替代技术 redis
+
+(2）二级缓存默认不是打开的，需要配置
+
+(3）二级缓存使用范围，是SessionFactory范围
+
+## 十、Hibernate事务
+
+Hibernate事务代码规范写法：
+
+```java
+@Test
+public void testTx() {
+    SessionFactory sessionFactory = null;
+    Session session = null;
+    Transaction tx = null;
+    try {
+        sessionFactory = HibernateUtils.getSessionFactory();
+        session = sessionFactory.openSession();
+        //开启事务
+        tx = session.beginTransaction();
+
+        //添加
+        User user = new User();
+        user.setUsername("小叶");
+        user.setPassword("123");
+        user.setAddress("北京");
+
+        session.save(user);
+
+        //提交事务
+        tx.commit();
+    }catch(Exception e) {
+        //回滚事务
+        tx.rollback();
+    }finally {
+        //关闭操作
+        session.close();
+        sessionFactory.close();
+    }
+}
+
+```
+
+## 十一、Hibernate绑定Session
+
+（1）在Hibernate核心配置文件中配置:
+
+```xml
+<property name="hibernate.current_session_context_class">thread</property>
+```
+
+（2）在工具类中提供返回与本地线程绑定的Session的方法
+
+```java
+public static Session getSessionObject() {
+    return sessionFactory.getCurrentSession();
+}
+```
+
+## 十二、Hibernate的api使用
+
+### 一、Query
+
+使用Query对象，不需要写sql语句，但是要写hql语句
+
+（1）hql（hibernate query language），hibernate提供的查询语言，这个hql语句和普通sql语句很相似
+
+（2）hql和sql语句区别
+
+​		使用sql操作表和表的字段
+
+​		使用hql操作实体类和属性
+
+（3）Query对象使用
+
+​		创建Query对象
+
+​		调用Query对象里面的方法得到结果
+
+```java
+Query query = session.createQuery("from User");
+List<User> list = query.list();
+for (User user: list) {
+	System.out.println(user);
+}
+```
 

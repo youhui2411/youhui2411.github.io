@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+      <html>
+          <head>
+          <meta charset="utf-8" >
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>RabbitMQ.md</title>
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github-gist.min.css" rel="stylesheet">  
+          <style>
+              .markdown-body {
+                  box-sizing: border-box;
+                  min-width: 200px;
+                  max-width: 980px;
+                  margin: 0 auto;
+                  padding: 45px;
+              }
+              .markdown-body img {
+                  box-sizing: border-box !important;
+                  margin:10px 0 10px 2%;
+                  padding: 20px;
+                  width: 96%;
+                  border-radius: 4px;
+                  box-shadow: 0 0 6px 0px #999;
+              }
+              @media (max-width: 767px) {
+                  .markdown-body {
+                      padding: 15px;
+                  }
+              }
+              @font-face{font-family:octicons-link;src:url(data:font/woff;charset=utf-8;base64,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) format('woff')}.markdown-body .octicon{display:inline-block;fill:currentColor;vertical-align:text-bottom}.markdown-body .anchor{float:left;line-height:1;margin-left:-20px;padding-right:4px}.markdown-body .anchor:focus{outline:0}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#1b1f23;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#24292e;line-height:1.5;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body .pl-c{color:#6a737d}.markdown-body .pl-c1,.markdown-body .pl-s .pl-v{color:#005cc5}.markdown-body .pl-e,.markdown-body .pl-en{color:#6f42c1}.markdown-body .pl-s .pl-s1,.markdown-body .pl-smi{color:#24292e}.markdown-body .pl-ent{color:#22863a}.markdown-body .pl-k{color:#d73a49}.markdown-body .pl-pds,.markdown-body .pl-s,.markdown-body .pl-s .pl-pse .pl-s1,.markdown-body .pl-sr,.markdown-body .pl-sr .pl-cce,.markdown-body .pl-sr .pl-sra,.markdown-body .pl-sr .pl-sre{color:#032f62}.markdown-body .pl-smw,.markdown-body .pl-v{color:#e36209}.markdown-body .pl-bu{color:#b31d28}.markdown-body .pl-ii{background-color:#b31d28;color:#fafbfc}.markdown-body .pl-c2{background-color:#d73a49;color:#fafbfc}.markdown-body .pl-c2:before{content:"^M"}.markdown-body .pl-sr .pl-cce{color:#22863a;font-weight:700}.markdown-body .pl-ml{color:#735c0f}.markdown-body .pl-mh,.markdown-body .pl-mh .pl-en,.markdown-body .pl-ms{color:#005cc5;font-weight:700}.markdown-body .pl-mi{color:#24292e;font-style:italic}.markdown-body .pl-mb{color:#24292e;font-weight:700}.markdown-body .pl-md{background-color:#ffeef0;color:#b31d28}.markdown-body .pl-mi1{background-color:#f0fff4;color:#22863a}.markdown-body .pl-mc{background-color:#ffebda;color:#e36209}.markdown-body .pl-mi2{background-color:#005cc5;color:#f6f8fa}.markdown-body .pl-mdr{color:#6f42c1;font-weight:700}.markdown-body .pl-ba{color:#586069}.markdown-body .pl-sg{color:#959da5}.markdown-body .pl-corl{color:#032f62;text-decoration:underline}.markdown-body details{display:block}.markdown-body summary{display:list-item}.markdown-body a{background-color:transparent}.markdown-body a:active,.markdown-body a:hover{outline-width:0}.markdown-body strong{font-weight:inherit;font-weight:bolder}.markdown-body h1{font-size:2em;margin:.67em 0}.markdown-body img{border-style:none}.markdown-body code,.markdown-body kbd,.markdown-body pre{font-family:monospace,monospace;font-size:1em}.markdown-body hr{box-sizing:content-box;height:0;overflow:visible}.markdown-body input{font:inherit;margin:0}.markdown-body input{overflow:visible}.markdown-body [type=checkbox]{box-sizing:border-box;padding:0}.markdown-body *{box-sizing:border-box}.markdown-body input{font-family:inherit;font-size:inherit;line-height:inherit}.markdown-body a{color:#0366d6;text-decoration:none}.markdown-body a:hover{text-decoration:underline}.markdown-body strong{font-weight:600}.markdown-body hr{background:0 0;border:0;border-bottom:1px solid #dfe2e5;height:0;margin:15px 0;overflow:hidden}.markdown-body hr:before{content:"";display:table}.markdown-body hr:after{clear:both;content:"";display:table}.markdown-body table{border-collapse:collapse;border-spacing:0}.markdown-body td,.markdown-body th{padding:0}.markdown-body details summary{cursor:pointer}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-bottom:0;margin-top:0}.markdown-body h1{font-size:32px}.markdown-body h1,.markdown-body h2{font-weight:600}.markdown-body h2{font-size:24px}.markdown-body h3{font-size:20px}.markdown-body h3,.markdown-body h4{font-weight:600}.markdown-body h4{font-size:16px}.markdown-body h5{font-size:14px}.markdown-body h5,.markdown-body h6{font-weight:600}.markdown-body h6{font-size:12px}.markdown-body p{margin-bottom:10px;margin-top:0}.markdown-body blockquote{margin:0}.markdown-body ol,.markdown-body ul{margin-bottom:0;margin-top:0;padding-left:0}.markdown-body ol ol,.markdown-body ul ol{list-style-type:lower-roman}.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ul ol ol,.markdown-body ul ul ol{list-style-type:lower-alpha}.markdown-body dd{margin-left:0}.markdown-body code,.markdown-body pre{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px}.markdown-body pre{margin-bottom:0;margin-top:0}.markdown-body input::-webkit-inner-spin-button,.markdown-body input::-webkit-outer-spin-button{-webkit-appearance:none;appearance:none;margin:0}.markdown-body .border{border:1px solid #e1e4e8!important}.markdown-body .border-0{border:0!important}.markdown-body .border-bottom{border-bottom:1px solid #e1e4e8!important}.markdown-body .rounded-1{border-radius:3px!important}.markdown-body .bg-white{background-color:#fff!important}.markdown-body .bg-gray-light{background-color:#fafbfc!important}.markdown-body .text-gray-light{color:#6a737d!important}.markdown-body .mb-0{margin-bottom:0!important}.markdown-body .my-2{margin-bottom:8px!important;margin-top:8px!important}.markdown-body .pl-0{padding-left:0!important}.markdown-body .py-0{padding-bottom:0!important;padding-top:0!important}.markdown-body .pl-1{padding-left:4px!important}.markdown-body .pl-2{padding-left:8px!important}.markdown-body .py-2{padding-bottom:8px!important;padding-top:8px!important}.markdown-body .pl-3,.markdown-body .px-3{padding-left:16px!important}.markdown-body .px-3{padding-right:16px!important}.markdown-body .pl-4{padding-left:24px!important}.markdown-body .pl-5{padding-left:32px!important}.markdown-body .pl-6{padding-left:40px!important}.markdown-body .f6{font-size:12px!important}.markdown-body .lh-condensed{line-height:1.25!important}.markdown-body .text-bold{font-weight:600!important}.markdown-body:before{content:"";display:table}.markdown-body:after{clear:both;content:"";display:table}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-bottom:16px;margin-top:0}.markdown-body hr{background-color:#e1e4e8;border:0;height:.25em;margin:24px 0;padding:0}.markdown-body blockquote{border-left:.25em solid #dfe2e5;color:#6a737d;padding:0 1em}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd{background-color:#fafbfc;border:1px solid #c6cbd1;border-bottom-color:#959da5;border-radius:3px;box-shadow:inset 0 -1px 0 #959da5;color:#444d56;display:inline-block;font-size:11px;line-height:10px;padding:3px 5px;vertical-align:middle}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{font-weight:600;line-height:1.25;margin-bottom:16px;margin-top:24px}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{border-bottom:1px solid #eaecef;padding-bottom:.3em}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{color:#6a737d;font-size:.85em}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-bottom:0;margin-top:0}.markdown-body li{word-wrap:break-all}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:1em;font-style:italic;font-weight:600;margin-top:16px;padding:0}.markdown-body dl dd{margin-bottom:16px;padding:0 16px}.markdown-body table{display:block;overflow:auto;width:100%}.markdown-body table th{font-weight:600}.markdown-body table td,.markdown-body table th{border:1px solid #dfe2e5;padding:6px 13px}.markdown-body table tr{background-color:#fff;border-top:1px solid #c6cbd1}.markdown-body table tr:nth-child(2n){background-color:#f6f8fa}.markdown-body img{background-color:#fff;box-sizing:content-box;max-width:100%}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body code{background-color:rgba(27,31,35,.05);border-radius:3px;font-size:85%;margin:0;padding:.2em .4em}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{background:0 0;border:0;font-size:100%;margin:0;padding:0;white-space:pre;word-break:normal}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{background-color:#f6f8fa;border-radius:3px;font-size:85%;line-height:1.45;overflow:auto;padding:16px}.markdown-body pre code{background-color:transparent;border:0;display:inline;line-height:inherit;margin:0;max-width:auto;overflow:visible;padding:0;word-wrap:normal}.markdown-body .commit-tease-sha{color:#444d56;display:inline-block;font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:90%}.markdown-body .blob-wrapper{border-bottom-left-radius:3px;border-bottom-right-radius:3px;overflow-x:auto;overflow-y:hidden}.markdown-body .blob-wrapper-embedded{max-height:240px;overflow-y:auto}.markdown-body .blob-num{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;color:rgba(27,31,35,.3);cursor:pointer;font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;line-height:20px;min-width:50px;padding-left:10px;padding-right:10px;text-align:right;user-select:none;vertical-align:top;white-space:nowrap;width:1%}.markdown-body .blob-num:hover{color:rgba(27,31,35,.6)}.markdown-body .blob-num:before{content:attr(data-line-number)}.markdown-body .blob-code{line-height:20px;padding-left:10px;padding-right:10px;position:relative;vertical-align:top}.markdown-body .blob-code-inner{color:#24292e;font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;font-size:12px;overflow:visible;white-space:pre;word-wrap:normal}.markdown-body .pl-token.active,.markdown-body .pl-token:hover{background:#ffea7f;cursor:pointer}.markdown-body kbd{background-color:#fafbfc;border:1px solid #d1d5da;border-bottom-color:#c6cbd1;border-radius:3px;box-shadow:inset 0 -1px 0 #c6cbd1;color:#444d56;display:inline-block;font:11px SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;line-height:10px;padding:3px 5px;vertical-align:middle}.markdown-body :checked+.radio-label{border-color:#0366d6;position:relative;z-index:1}.markdown-body .tab-size[data-tab-size="1"]{-moz-tab-size:1;tab-size:1}.markdown-body .tab-size[data-tab-size="2"]{-moz-tab-size:2;tab-size:2}.markdown-body .tab-size[data-tab-size="3"]{-moz-tab-size:3;tab-size:3}.markdown-body .tab-size[data-tab-size="4"]{-moz-tab-size:4;tab-size:4}.markdown-body .tab-size[data-tab-size="5"]{-moz-tab-size:5;tab-size:5}.markdown-body .tab-size[data-tab-size="6"]{-moz-tab-size:6;tab-size:6}.markdown-body .tab-size[data-tab-size="7"]{-moz-tab-size:7;tab-size:7}.markdown-body .tab-size[data-tab-size="8"]{-moz-tab-size:8;tab-size:8}.markdown-body .tab-size[data-tab-size="9"]{-moz-tab-size:9;tab-size:9}.markdown-body .tab-size[data-tab-size="10"]{-moz-tab-size:10;tab-size:10}.markdown-body .tab-size[data-tab-size="11"]{-moz-tab-size:11;tab-size:11}.markdown-body .tab-size[data-tab-size="12"]{-moz-tab-size:12;tab-size:12}.markdown-body .task-list-item{list-style-type:none}.markdown-body .task-list-item+.task-list-item{margin-top:3px}.markdown-body .task-list-item input{margin:0 .2em .25em -1.6em;vertical-align:middle}.markdown-body hr{border-bottom-color:#eee}.markdown-body .pl-0{padding-left:0!important}.markdown-body .pl-1{padding-left:4px!important}.markdown-body .pl-2{padding-left:8px!important}.markdown-body .pl-3{padding-left:16px!important}.markdown-body .pl-4{padding-left:24px!important}.markdown-body .pl-5{padding-left:32px!important}.markdown-body .pl-6{padding-left:40px!important}.markdown-body .pl-7{padding-left:48px!important}.markdown-body .pl-8{padding-left:64px!important}.markdown-body .pl-9{padding-left:80px!important}.markdown-body .pl-10{padding-left:96px!important}.markdown-body .pl-11{padding-left:112px!important}.markdown-body .pl-12{padding-left:128px!important}
+/*# sourceMappingURL=github-markdown.min.css.map */
+          </style>
+          <script>
+              window.onload = function() {
+                hljs.initHighlighting()
+              }
+          </script>
+          </head>
+          <body>
+            <article class="markdown-body">
+                <h1 id="rabbitmq学习笔记">RabbitMQ学习笔记</h1>
+<h2 id="一、什么是rabbitmq？">一、什么是RabbitMQ？</h2>
+<p>RabbitMQ是一套开源的消息队列服务软件，是由 LShift 提供的一个 AMQP（Advanced Message Queuing Protocol ）的开源实现，由以高性能、健壮以及可伸缩性出名的 Erlang 写成。</p>
+<h2 id="二、安装rabbitmq">二、安装RabbitMQ</h2>
+<h3 id="1、安装erlang">1、安装Erlang</h3>
+<h4 id="11什么是erlang？">1.1什么是Erlang？</h4>
+<p>Erlang是一种通用的面向并发的编程语言，它由瑞典电信设备制造商爱立信所辖的CS-Lab开发，目的是创造一种可以应对大规模并发活动的编程语言和运行环境。</p>
+<h4 id="12erlang安装步骤">1.2Erlang安装步骤</h4>
+<h5 id="121安装命令">1.2.1安装命令</h5>
+<pre><code class="language-shell">wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm</code></pre>
+<pre><code class="language-shell">rpm -Uvh erlang-solutions-1.0-1.noarch.rpm</code></pre>
+<pre><code class="language-shell">yum install erlang</code></pre>
+<h3 id="2、安装rabbitmq-server">2、安装RabbitMQ Server</h3>
+<pre><code class="language-shell">wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.1/rabbitmq-server-3.5.1-1.noarch.rpm</code></pre>
+<pre><code class="language-shell">rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc</code></pre>
+<pre><code class="language-shell">yum install rabbitmq-server-3.5.1-1.noarch.rpm</code></pre>
+<h3 id="3、启动rabbitmq">3、启动RabbitMQ</h3>
+<p>1、配置为守护进程随系统自动启动，root权限下执行:</p>
+<pre><code class="language-shell">chkconfig rabbitmq-server on</code></pre>
+<p>2、启动rabbitMQ服务</p>
+<pre><code class="language-shell">#启动
+systemctl start rabbitmq-server
+
+#查看RabbitMQ状态
+systemctl status rabbitmq-server
+
+#重启
+systemctl restart rabbitmq-server
+
+#关闭
+systemctl stop rabbitmq-server</code></pre>
+<h3 id="4、安装web管理界面插件">4、安装Web管理界面插件</h3>
+<p>安装命令：</p>
+<pre><code class="language-shell">rabbitmq-plugins enable rabbitmq_management</code></pre>
+<p>安装成功提示：</p>
+<pre><code class="language-markdown">The following plugins have been enabled:
+      mochiweb
+      webmachine
+      rabbitmq_web_dispatch
+      amqp_client
+      rabbitmq_management_agent
+      rabbitmq_management
+    Plugin configuration has changed. Restart RabbitMQ for changes to take effect.</code></pre>
+<h3 id="5、设置rabbitmq远程ip登录">5、设置RabbitMQ远程ip登录</h3>
+<p>这里我们创建一个账号名为yyh，密码为123456的管理员用户，并支持远程ip访问。</p>
+<h4 id="51、创建账号">5.1、创建账号</h4>
+<pre><code class="language-shell">rabbitmqctl add_user yyh 123456</code></pre>
+<h4 id="52、设置用户角色">5.2、设置用户角色</h4>
+<pre><code class="language-shell">rabbitmqctl  set_user_tags  yyh  administrator</code></pre>
+<h4 id="53、设置用户权限">5.3、设置用户权限</h4>
+<pre><code class="language-shell">rabbitmqctl set_permissions -p &quot;/&quot; yyh &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</code></pre>
+<h4 id="54、设置完成后可以查看当前用户和角色">5.4、设置完成后可以查看当前用户和角色</h4>
+<pre><code class="language-shell">rabbitmqctl list_users</code></pre>
+<h3 id="6、远程访问rabbitmq">6、远程访问RabbitMQ</h3>
+<p>浏览器中输入：</p>
+<pre><code>http://serverip:15672</code></pre><p>其中serverip是RabbitMQ-Server所在主机的ip</p>
+<h2 id="三、为什么要使用-rabbitmq？-他解决了什么问题？">三、为什么要使用 RabbitMQ？ 他解决了什么问题？</h2>
+<h3 id="1、同步变异步">1、同步变异步</h3>
+<p><img src="image%5C%E6%8D%95%E8%8E%B76.PNG" alt=""></p>
+<h3 id="2、解耦">2、解耦</h3>
+<p><img src="image%5C%E6%8D%95%E8%8E%B77.PNG" alt=""></p>
+<h3 id="3、流量削峰">3、流量削峰</h3>
+<p><img src="image%5C%E6%8D%95%E8%8E%B79.PNG" alt=""></p>
+<h2 id="四、rabbitmq-的入门">四、RabbitMQ 的入门</h2>
+<h3 id="1、搭建项目环境">1、搭建项目环境</h3>
+<h4 id="1、添加rabbitmq坐标">1、添加RabbitMQ坐标</h4>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+<h4 id="2、修改全局配置文件，-添加-rabbitmq-相关的配置">2、修改全局配置文件， 添加 RabbitMQ 相关的配置</h4>
+<pre><code class="language-properties">spring.application.name=springcloud-mq
+spring.rabbitmq.host=192.168.40.133
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=yyh
+spring.rabbitmq.password=123456</code></pre>
+<h3 id="2、编码">2、编码</h3>
+<h4 id="1、创建队列">1、创建队列</h4>
+<pre><code class="language-java">@Configuration
+public class QueueConfig {
+
+    @Bean
+    public Queue createQueue(){
+        return new Queue(&quot;hello-queue&quot;);
+    }
+}</code></pre>
+<h4 id="2、创建provider">2、创建Provider</h4>
+<pre><code class="language-java">@Component
+public class Sender {
+    @Autowired
+    private AmqpTemplate rabbitAmqpTemplate;
+
+    public void send(String msg){
+        //向消息队列发送消息
+        // 参数一： 队列的名称
+        //参数二： 消息
+        this.rabbitAmqpTemplate.convertAndSend(&quot;hello-queue&quot;, msg);
+    }
+}</code></pre>
+<h4 id="3、创建consumer">3、创建Consumer</h4>
+<pre><code class="language-java">@Component
+public class Receiver {
+    //采用消息队列监听机制
+    @RabbitListener(queues=&quot;hello-queue&quot;)
+    public void process(String msg){
+        System.out.println(&quot;receiver: &quot;+msg);
+    }
+}</code></pre>
+<h4 id="4、创建启动类">4、创建启动类</h4>
+<pre><code class="language-java">@SpringBootApplication
+public class SpringbootMqApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringbootMqApplication.class, args);
+    }
+
+}</code></pre>
+<h4 id="5、测试">5、测试</h4>
+<pre><code class="language-java">@RunWith(SpringRunner.class)
+@SpringBootTest(classes=SpringbootMqApplication.class)
+class SpringbootMqApplicationTests {
+
+    @Autowired
+    private Sender sender;
+    /*
+     * 测试消息队列
+     */
+    @Test
+    public void test1(){
+        this.sender.send(&quot;Hello RabbitMQ&quot;);
+    }
+
+}
+</code></pre>
+<h2 id="五、rabbitmq原理">五、RabbitMQ原理</h2>
+<h3 id="51、rabbitmq原理图">5.1、RabbitMQ原理图</h3>
+<p><img src="image%5C%E6%8D%95%E8%8E%B712.PNG" alt=""></p>
+<p><img src="image%5C%E6%8D%95%E8%8E%B713.PNG" alt=""></p>
+<h3 id="52、名词解释">5.2、名词解释</h3>
+<h4 id="1、message">1、Message</h4>
+<p>指消息，消息是不具名的， 它由消息头消息体组成。 消息体是不透明的， 而消息头则由 一系列可选属性组成， 这些属性包括： routing-key(路由键)、 priority(相对于其他消息的优先 权)、 delivery-mode(指出消息可能持久性存储)等。</p>
+<h4 id="2、publisher">2、Publisher</h4>
+<p>消息的生产者。 也是一个向交换器发布消息的客户端应用程序。</p>
+<h4 id="3、consumer">3、Consumer</h4>
+<p>消息的消费者。 表示一个从消息队列中取得消息的客户端应用程序。</p>
+<h4 id="4、exchange">4、Exchange</h4>
+<p>交换器。 用来接收生产者发送的消息并将这些消息路由给服务器中的队列。 </p>
+<p>三种常用的交换器类型 </p>
+<p>1、direct(发布与订阅 完全匹配)</p>
+<p>2、fanout(广播) </p>
+<p>3、topic(主题， 规则匹配)</p>
+<h4 id="5、binding">5、Binding</h4>
+<p>绑定。 用于消息队列和交换器之间的关联。 一个绑定就是基于路由键将交换器和消息 队列连接起来的路由规则， 所以可以将交换器理解成一个由绑定构成的路由表。</p>
+<h4 id="6、queue">6、Queue</h4>
+<p>消息队列。 用来保存消息直到发送给消费者。 它是消息的容器， 也是消息的终点。 一 个消息可投入一个或多个队列。 消息一直在队列里面， 等待消费者链接到这个队列将其取 走。</p>
+<h4 id="7、routing-key">7、Routing-key</h4>
+<p>路由键。 RabbitMQ 决定消息该投递到哪个队列的规则。</p>
+<p>队列通过路由键绑定到交换器。 </p>
+<p>消息发送到 MQ 服务器时， 消息将拥有一个路由键， 即便是空的， RabbitMQ 也会将其 和绑定使用的路由键进行匹配。 </p>
+<p>如果相匹配， 消息将会投递到该队列。 </p>
+<p>如果不匹配， 消息将会进入黑洞。</p>
+<h4 id="8、connection">8、Connection</h4>
+<p>链接。 指 rabbit 服务器和服务建立的 TCP 链接。</p>
+<h4 id="9、channel">9、Channel</h4>
+<p>信道。是 TCP 里面的虚拟链接。 例如： 电缆相当于 TCP， 信道是 一个独立光纤束， 一条 TCP 连接上创建多条信道是没有问题的。 </p>
+<p>TCP 一旦打开， 就会创建 AMQP 信道。 </p>
+<p>无论是发布消息、 接收消息、 订阅队列， 这些动作都是通过信道完成的。</p>
+<h4 id="10、virtual-host">10、Virtual Host</h4>
+<p>虚拟主机。 表示一批交换器， 消息队列和相关对象。 虚拟主机是共享相同的身份认证 和加密环境的独立服务器域。 每个 Virtual Host 本质上就是一个 mini 版的 RabbitMQ 服务器， 拥有自己的队列、交换器、绑定和权限机制。 Virtual Host 是 AMQP 概念的基础， 必须在链接时指定， RabbitMQ 默认的 vhost 是/</p>
+<h4 id="11、borker">11、Borker</h4>
+<p>表示消息队列服务器实体。</p>
+<h4 id="12、交换器和队列的关系">12、交换器和队列的关系</h4>
+<p>交换器是通过路由键和队列绑定在一起的， 如果消息拥有的路由键跟队列和交换器的 路由键匹配， 那么消息就会被路由到该绑定的队列中。 也就是说， 消息到队列的过程中， 消息首先会经过交换器， 接下来交换器在通过路由 键匹配分发消息到具体的队列中。 路由键可以理解为匹配的规则。</p>
+<h4 id="13、rabbitmq-为什么需要信道？-为什么不是-tcp-直接通信？">13、RabbitMQ 为什么需要信道？ 为什么不是 TCP 直接通信？</h4>
+<p>1、TCP 的创建和销毁开销特别大。 创建需要 3 次握手， 销毁需要 4 次分手。</p>
+<p>2、如果不用信道， 那应用程序就会以 TCP 链接 RabbitMQ， 高峰时每秒成千上万条链接会造成资源巨大的浪费， 而且操作系统每秒处理 TCP 链接数也是有限制的，必定造成性能瓶颈。</p>
+<p>3、信道的原理是一条线程一条通道，多条线程多条通道同用一条 TCP 链接。一条 TCP 链接可以容纳无限的信道，即使每秒成千上万的请求也不会成为性能的瓶颈。</p>
+<h2 id="六、rabbitmq交换器">六、RabbitMQ交换器</h2>
+<h3 id="1、direct-交换器">1、Direct 交换器</h3>
+<h4 id="1、需求">1、需求</h4>
+<p>业务场景：系统日志处理</p>
+<p>1、微服务产生的日志，交给日志服务器处理</p>
+<p>2、日志处理服务器有4个服务，分别为DEBUG、INFO、WARN、ERROR</p>
+<p>3.服务直接的通信采用direct（发布与订阅完全匹配)  </p>
+<p><img src="image%5C%E6%8D%95%E8%8E%B7123.PNG" alt=""></p>
+<h4 id="2、编码实现">2、编码实现</h4>
+<h5 id="1、编写consumer">1、编写Consumer</h5>
+<h6 id="1、修改-consumer-的全局配置文件">1、修改 Consumer 的全局配置文件</h6>
+<pre><code class="language-properties">spring.application.name=springcloud-mq
+spring.rabbitmq.host=192.168.40.133
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=yyh
+spring.rabbitmq.password=123456
+#设置交换器的名称
+mq.config.exchange=log.direct
+#info 队列名称
+mq.config.queue.info=log.info
+#info 路由键
+mq.config.queue.info.routing.key=log.info.routing.key
+#error 队列名称
+mq.config.queue.error=log.error
+#error 路由键
+mq.config.queue.error.routing.key=log.error.routing.key
+</code></pre>
+<h6 id="2、inforeceiver">2、InfoReceiver</h6>
+<pre><code class="language-java">/**
+ * 消息接收者
+ * @author Administrator
+ * @RabbitListener bindings:绑定队列
+ * @QueueBinding value:绑定队列的名称
+ * exchange:配置交换器
+ * @Queue value:配置队列名称
+ * autoDelete:是否是一个可删除的临时队列
+ * @Exchange value:为交换器起个名称
+ * type:指定具体的交换器类型
+ */
+@Component
+@RabbitListener(
+        bindings=@QueueBinding(
+                value=@Queue(value=&quot;${mq.config.queue.info}&quot;,autoDelete=&quot;true&quot;),
+                exchange=@Exchange(value=&quot;${mq.config.exchange}&quot;,type= ExchangeTypes.DIRECT),
+                key=&quot;${mq.config.queue.info.routing.key}&quot;
+        )
+)
+public class InfoReceiver {
+    @RabbitHandler
+    public void process(String msg){
+        System.out.println(&quot;Info...receiver: &quot;+msg);
+    }
+}
+</code></pre>
+<h6 id="3、errorreceiver">3、ErrorReceiver</h6>
+<pre><code class="language-java">/**
+ * 消息接收者
+ * @author Administrator
+ * @RabbitListener bindings:绑定队列
+ * @QueueBinding value:绑定队列的名称
+ * exchange:配置交换器
+ * @Queue value:配置队列名称
+ * autoDelete:是否是一个可删除的临时队列
+ * @Exchange value:为交换器起个名称
+ * type:指定具体的交换器类型
+ */
+@Component
+@RabbitListener(bindings=@QueueBinding(
+        value=@Queue(value=&quot;${mq.config.queue.error}&quot;,autoDelete=&quot;true&quot;),
+                exchange=@Exchange(value=&quot;${mq.config.exchange}&quot;,type= ExchangeTypes.DIRECT),
+                key=&quot;${mq.config.queue.error.routing.key}&quot;
+        )
+)
+public class ErrorReceiver {
+    @RabbitHandler
+    public void process(String msg){
+        System.out.println(&quot;Error...receiver: &quot;+msg);
+    }
+}
+</code></pre>
+<h5 id="2、编写provider">2、编写Provider</h5>
+<h6 id="1、修改-provider-的全局配置文件">1、修改 Provider 的全局配置文件</h6>
+<pre><code class="language-properties">spring.application.name=springcloud-mq
+spring.rabbitmq.host=192.168.40.133
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=yyh
+spring.rabbitmq.password=123456
+#设置交换器的名称
+mq.config.exchange=log.direct
+#info 路由键
+mq.config.queue.info.routing.key=log.info.routing.key
+#error 路由键
+mq.config.queue.error.routing.key=log.error.routing.key
+</code></pre>
+<h6 id="2、sender">2、Sender</h6>
+<pre><code class="language-java">@Component
+public class Sender {
+    @Autowired
+    private AmqpTemplate rabbitAmqpTemplate;
+    //exchange 交换器名称
+    @Value(&quot;${mq.config.exchange}&quot;)
+    private String exchange;
+    //routingkey 路由键
+    @Value(&quot;${mq.config.queue.error.routing.key}&quot;)
+    private String routingkey;
+
+    public void send(String msg){
+        //向消息队列发送消息
+        //参数一： 交换器名称。
+        //参数二： 路由键
+        //参数三： 消息
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange, this.routingkey, msg);
+    }
+}
+</code></pre>
+<h5 id="3、测试">3、测试</h5>
+<pre><code class="language-java">@RunWith(SpringRunner.class)
+@SpringBootTest(classes = SpringbootMqProviderApplication.class)
+class SpringbootMqProviderApplicationTests {
+
+    @Autowired
+    private Sender sender;
+
+    @Test
+    void test() throws InterruptedException {
+        while(true){
+            Thread.sleep(1000);
+            this.sender.send(&quot;Hello RabbitMQ&quot;);
+        }
+    }
+
+}
+</code></pre>
+<h3 id="2、topic交换器">2、Topic交换器</h3>
+<h4 id="1、需求-1">1、需求</h4>
+<p><img src="image%5C%E6%8D%95%E8%8E%B754.PNG" alt=""></p>
+<h4 id="2、编码实现-1">2、编码实现</h4>
+<h5 id="1、编写provider">1、编写Provider</h5>
+<h6 id="1、修改provider全局配置文件">1、修改Provider全局配置文件</h6>
+<pre><code class="language-properties">spring.application.name=springcloud-mq
+spring.rabbitmq.host=192.168.40.133
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=yyh
+spring.rabbitmq.password=123456
+#设置交换器的名称
+mq.config.exchange=log.topic</code></pre>
+<h6 id="2、usersender">2、UserSender</h6>
+<pre><code class="language-java">@Component
+public class UserSender {
+    @Autowired
+    private AmqpTemplate rabbitAmqpTemplate;
+    //exchange 交换器名称
+    @Value(&quot;${mq.config.exchange}&quot;)
+    private String exchange;
+
+    public void send(String msg){
+        //向消息队列发送消息
+        //参数一： 交换器名称
+        //参数二： 路由键
+        //参数三： 消息
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;user.log.debug&quot;, &quot;user.log.debug...&quot;+msg);
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;user.log.info&quot;, &quot;user.log.info...&quot;+msg);
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;user.log.warn&quot;,&quot;user.log.warn...&quot;+msg);
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;user.log.error&quot;, &quot;user.log.error...&quot;+msg);
+    }
+}
+</code></pre>
+<h6 id="3、productsender">3、ProductSender</h6>
+<pre><code class="language-java">@Component
+public class ProductSender {
+    @Autowired
+    private AmqpTemplate rabbitAmqpTemplate;
+    //exchange 交换器名称
+    @Value(&quot;${mq.config.exchange}&quot;)
+    private String exchange;
+    /*
+     * 发送消息的方法
+     */
+    public void send(String msg){
+        //向消息队列发送消息
+        //参数一： 交换器名称。
+        //参数二： 路由键
+        //参数三： 消息
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;product.log.debug&quot;, &quot;product.log.debug...&quot;+msg);
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;product.log.info&quot;, &quot;product.log.info...&quot;+msg);
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;product.log.warn&quot;,&quot;product.log.warn...&quot;+msg);
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;product.log.error&quot;, &quot;product.log.error...&quot;+msg);
+    }
+}
+</code></pre>
+<h6 id="4、ordersender">4、OrderSender</h6>
+<pre><code class="language-java">@Component
+public class OrderSender {
+    @Autowired
+    private AmqpTemplate rabbitAmqpTemplate;
+    //exchange 交换器名称
+    @Value(&quot;${mq.config.exchange}&quot;)
+    private String exchange;
+    /*
+     * 发送消息的方法
+     */
+    public void send(String msg){
+        //向消息队列发送消息
+        //参数一： 交换器名称。
+        //参数二： 路由键
+        //参数三： 消息
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;order.log.debug&quot;, &quot;order.log.debug...&quot;+msg);
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;order.log.info&quot;, &quot;order.log.info...&quot;+msg);
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;order.log.warn&quot;,&quot;order.log.warn...&quot;+msg);
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange,&quot;order.log.error&quot;, &quot;order.log.error...&quot;+msg);
+    }
+}
+</code></pre>
+<h5 id="2、编写consumer">2、编写Consumer</h5>
+<h6 id="1、修改consumer全局配置文件">1、修改Consumer全局配置文件</h6>
+<pre><code class="language-properties">spring.application.name=springcloud-mq
+spring.rabbitmq.host=192.168.40.133
+  spring.rabbitmq.port=5672
+spring.rabbitmq.username=yyh
+spring.rabbitmq.password=123456
+#设置交换器的名称
+mq.config.exchange=log.topic
+#info 队列名称
+mq.config.queue.info=log.info
+#error 队列名称
+mq.config.queue.error=log.error
+#log 队列名称
+mq.config.queue.logs=log.all</code></pre>
+<h6 id="2、inforeceiver-1">2、InfoReceiver</h6>
+<pre><code class="language-java">/**
+ * 消息接收者
+ * @author Administrator
+ * @RabbitListener bindings:绑定队列
+ * @QueueBinding value:绑定队列的名称
+ * exchange:配置交换器
+ **
+ @Queue value:配置队列名称
+  * autoDelete:是否是一个可删除的临时队列
+ **
+ @Exchange value:为交换器起个名称
+  * type:指定具体的交换器类型
+ */
+@Component
+@RabbitListener(
+    bindings=@QueueBinding(
+        value=@Queue(value=&quot;${mq.config.queue.info}&quot;,autoDelete=&quot;true&quot;),
+        exchange=@Exchange(value=&quot;${mq.config.exchange}&quot;,type=ExchangeTypes.TOPIC),
+        key=&quot;*.log.info&quot;
+    )
+)
+public class InfoReceiver {
+    /**
+     * 接收消息的方法。 采用消息队列监听机制
+     * @param msg
+     */
+    @RabbitHandler
+    public void process(String msg){
+        System.out.println(&quot;...Info...receiver: &quot;+msg);
+    }
+}</code></pre>
+<h6 id="3、errorreceiver-1">3、ErrorReceiver</h6>
+<pre><code class="language-java">/**
+ * 消息接收者
+ * @author Administrator
+ * @RabbitListener bindings:绑定队列
+ * @QueueBinding value:绑定队列的名称
+ * exchange:配置交换器
+ **
+ @Queue value:配置队列名称
+  * autoDelete:是否是一个可删除的临时队列
+ **
+ @Exchange value:为交换器起个名称
+  * type:指定具体的交换器类型
+ */
+@Component
+@RabbitListener(
+    bindings=@QueueBinding(
+        value=@Queue(value=&quot;${mq.config.queue.error}&quot;,autoDelete=&quot;true&quot;),
+        exchange=@Exchange(value=&quot;${mq.config.exchange}&quot;,type=ExchangeTypes.TOPIC),
+        key=&quot;*.log.error&quot;
+    )
+)
+public class ErrorReceiver {
+    /**
+    * 接收消息的方法。 采用消息队列监听机制
+    * @param msg
+    */
+    @RabbitHandler
+    public void process(String msg){
+        System.out.println(&quot;...Error...receiver: &quot;+msg);
+    }
+}</code></pre>
+<h6 id="4、logsreceiver">4、LogsReceiver</h6>
+<pre><code class="language-java">**
+ * 消息接收者
+ * @author Administrator
+ * @RabbitListener bindings:绑定队列
+ * @QueueBinding value:绑定队列的名称
+ * exchange:配置交换器
+ **
+ @Queue value:配置队列名称
+  * autoDelete:是否是一个可删除的临时队列
+ **
+ @Exchange value:为交换器起个名称
+  * type:指定具体的交换器类型
+ */
+@Component
+@RabbitListener(
+    bindings=@QueueBinding(
+        value=@Queue(value=&quot;${mq.config.queue.logs}&quot;,autoDelete=&quot;true&quot;),
+        exchange=@Exchange(value=&quot;${mq.config.exchange}&quot;,type= ExchangeTypes.TOPIC),
+        key=&quot;*.log.*&quot;
+    )
+)
+public class LogsReceiver {
+    /**
+     * 接收消息的方法。 采用消息队列监听机制
+     * @param msg
+     */
+    @RabbitHandler
+    public void process(String msg){
+        System.out.println(&quot;...All...receiver: &quot;+msg);
+    }
+}
+</code></pre>
+<h5 id="3、测试-1">3、测试</h5>
+<pre><code class="language-java">@RunWith(SpringRunner.class)
+@SpringBootTest(classes=SpringbootMqProviderApplication.class)
+public class SpringbootMqProviderApplicationTests {
+    @Autowired
+    private UserSender usersender;
+    @Autowired
+    private ProductSender productsender;
+    @Autowired
+    private OrderSender ordersender;
+    /*
+     * 测试消息队列
+     */
+    @Test
+    public void test(){
+        this.usersender.send(&quot;UserSender...&quot;);
+        this.productsender.send(&quot;ProductSender...&quot;);
+        this.ordersender.send(&quot;OrderSender...&quot;);
+    }
+}</code></pre>
+
+            </article> 
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>  
+          </body>
+      </html>

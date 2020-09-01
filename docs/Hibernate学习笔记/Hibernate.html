@@ -182,7 +182,7 @@
 </code></pre>
 <h3 id="五、运行结果">五、运行结果</h3>
 <p><img src="image/2.PNG" alt=""></p>
-<h3 id="六、hibernate几个核心类">六、Hibernate几个核心类</h3>
+<h2 id="四、hibernate几个核心类">四、Hibernate几个核心类</h2>
 <h4 id="一、configuration">一、Configuration</h4>
 <pre><code class="language-java">Configuration cfg = new Configuration();
 cfg.configure();</code></pre>
@@ -217,7 +217,153 @@ cfg.configure();</code></pre>
 <p>3 、Session对象是单线程对象</p>
 <p>（1）Session对象不能共用，只能自己使用</p>
 <h4 id="四、transaction">四、Transaction</h4>
-<p>事务对象</p>
+<p>事务的四个特性：原子性、一致性、隔离性、持久性</p>
+<h2 id="五、实体类编写规则">五、实体类编写规则</h2>
+<p>1 、实体类里面属性私有的</p>
+<p>2 、私有属性使用公开的set和get方法操作</p>
+<p>3、 要求实体类有属性作为唯一值（一般使用id值）</p>
+<p>4 、实体类属性建议不使用基本数据类型，而使用基本数据类型对应的包装类</p>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>对应的包装类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>Byte</td>
+</tr>
+</tbody></table>
+<h2 id="六、hibernate主键生成策略">六、Hibernate主键生成策略</h2>
+<p>Hibernate要求实体类里面有一个属性作为唯一值，对应表的主键，主键可以有不同的生成策略，</p>
+<p><img src="image/3.PNG" alt=""></p>
+<h2 id="七、crud操作">七、CRUD操作</h2>
+<h3 id="一、添加">一、添加</h3>
+<pre><code class="language-java">User user = new User();
+user.setUsername(&quot;小刘&quot;);
+user.setPassword(&quot;111&quot;);
+user.setAddress(&quot;Japan&quot;);
+
+session.save(user);</code></pre>
+<h3 id="二、根据id查询">二、根据id查询</h3>
+<pre><code class="language-java">User user = session.get(User.class,1);</code></pre>
+<h3 id="三、修改">三、修改</h3>
+<pre><code class="language-java">User user = session.get(User.class,1);
+user.setUsername(&quot;小王&quot;);
+
+session.update(user);</code></pre>
+<h3 id="四、删除">四、删除</h3>
+<pre><code class="language-java">User user = session.get(User.class,1);
+
+session.delete(user);</code></pre>
+<h2 id="八、实体类对象状态">八、实体类对象状态</h2>
+<p>1、瞬时态（对象里面没有id值，对象与session没有关联）</p>
+<pre><code class="language-java">User user = new User();
+user.setUsername(&quot;小刘&quot;);
+user.setPassword(&quot;111&quot;);
+user.setAddress(&quot;Japan&quot;);</code></pre>
+<p>2、持久态（对象里面有id值，对象与session关联）</p>
+<pre><code class="language-java">User user = session.get(User.class,1);</code></pre>
+<p>3、托管态（对象有id值，对象与session没有关联）</p>
+<pre><code class="language-java">User user = new User();
+user.setId(1);</code></pre>
+<p><strong>注</strong>：</p>
+<p>saveOrUpdate方法在实体类为瞬时态时做添加操作，托管态和持久态时做修改操作</p>
+<h2 id="九、hibernate缓存">九、Hibernate缓存</h2>
+<h3 id="一、hibernate缓存特点">一、Hibernate缓存特点</h3>
+<h4 id="一、hibernate的一级缓存">一、Hibernate的一级缓存</h4>
+<p>(1）Hibernate的一级缓存默认打开的</p>
+<p>(2）Hibernate的一级缓存使用范围，是Session范围，从Session创建到Session关闭范围</p>
+<p>(3）Hibernate的一级缓存中，存储数据必须 持久态数据</p>
+<p><strong><em>Hibernate一级缓存特性：持久态自动更新数据库</em></strong></p>
+<h4 id="二、hibernate的二级缓存">二、Hibernate的二级缓存</h4>
+<p>(1）目前已经不使用了，替代技术 redis</p>
+<p>(2）二级缓存默认不是打开的，需要配置</p>
+<p>(3）二级缓存使用范围，是SessionFactory范围</p>
+<h2 id="十、hibernate事务">十、Hibernate事务</h2>
+<p>Hibernate事务代码规范写法：</p>
+<pre><code class="language-java">@Test
+public void testTx() {
+    SessionFactory sessionFactory = null;
+    Session session = null;
+    Transaction tx = null;
+    try {
+        sessionFactory = HibernateUtils.getSessionFactory();
+        session = sessionFactory.openSession();
+        //开启事务
+        tx = session.beginTransaction();
+
+        //添加
+        User user = new User();
+        user.setUsername(&quot;小叶&quot;);
+        user.setPassword(&quot;123&quot;);
+        user.setAddress(&quot;北京&quot;);
+
+        session.save(user);
+
+        //提交事务
+        tx.commit();
+    }catch(Exception e) {
+        //回滚事务
+        tx.rollback();
+    }finally {
+        //关闭操作
+        session.close();
+        sessionFactory.close();
+    }
+}
+</code></pre>
+<h2 id="十一、hibernate绑定session">十一、Hibernate绑定Session</h2>
+<p>（1）在Hibernate核心配置文件中配置:</p>
+<pre><code class="language-xml">&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</code></pre>
+<p>（2）在工具类中提供返回与本地线程绑定的Session的方法</p>
+<pre><code class="language-java">public static Session getSessionObject() {
+    return sessionFactory.getCurrentSession();
+}</code></pre>
+<h2 id="十二、hibernate的api使用">十二、Hibernate的api使用</h2>
+<h3 id="一、query">一、Query</h3>
+<p>使用Query对象，不需要写sql语句，但是要写hql语句</p>
+<p>（1）hql（hibernate query language），hibernate提供的查询语言，这个hql语句和普通sql语句很相似</p>
+<p>（2）hql和sql语句区别</p>
+<p>​        使用sql操作表和表的字段</p>
+<p>​        使用hql操作实体类和属性</p>
+<p>（3）Query对象使用</p>
+<p>​        创建Query对象</p>
+<p>​        调用Query对象里面的方法得到结果</p>
+<pre><code class="language-java">Query query = session.createQuery(&quot;from User&quot;);
+List&lt;User&gt; list = query.list();
+for (User user: list) {
+    System.out.println(user);
+}</code></pre>
 
             </article> 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>  
