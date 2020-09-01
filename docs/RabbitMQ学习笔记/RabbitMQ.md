@@ -129,15 +129,15 @@ http://serverip:15672
 
 ### 1、同步变异步
 
-![](image\捕获6.PNG)
+![](image/捕获6.PNG)
 
 ### 2、解耦
 
-![](image\捕获7.PNG)
+![](image/捕获7.PNG)
 
 ### 3、流量削峰
 
-![](image\捕获9.PNG)
+![](image/捕获9.PNG)
 
 ## 四、RabbitMQ 的入门  
 
@@ -245,9 +245,9 @@ class SpringbootMqApplicationTests {
 
 ### 5.1、RabbitMQ原理图
 
-![](image\捕获12.PNG)
+![](image/捕获12.PNG)
 
-![](image\捕获13.PNG)
+![](image/捕获13.PNG)
 
 ### 5.2、名词解释
 
@@ -341,7 +341,7 @@ TCP 一旦打开， 就会创建 AMQP 信道。
 
 3.服务直接的通信采用direct（发布与订阅完全匹配)  
 
-![](image\捕获123.PNG)
+![](image/捕获123.PNG)
 
 #### 2、编码实现
 
@@ -499,7 +499,7 @@ class SpringbootMqProviderApplicationTests {
 
 #### 1、需求
 
-![](image\捕获54.PNG)
+![](image/捕获54.PNG)
 
 #### 2、编码实现
 

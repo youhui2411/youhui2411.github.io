@@ -95,11 +95,11 @@ systemctl stop rabbitmq-server</code></pre>
 <pre><code>http://serverip:15672</code></pre><p>其中serverip是RabbitMQ-Server所在主机的ip</p>
 <h2 id="三、为什么要使用-rabbitmq？-他解决了什么问题？">三、为什么要使用 RabbitMQ？ 他解决了什么问题？</h2>
 <h3 id="1、同步变异步">1、同步变异步</h3>
-<p><img src="image%5C%E6%8D%95%E8%8E%B76.PNG" alt=""></p>
+<p><img src="image/%E6%8D%95%E8%8E%B76.PNG" alt=""></p>
 <h3 id="2、解耦">2、解耦</h3>
-<p><img src="image%5C%E6%8D%95%E8%8E%B77.PNG" alt=""></p>
+<p><img src="image/%E6%8D%95%E8%8E%B77.PNG" alt=""></p>
 <h3 id="3、流量削峰">3、流量削峰</h3>
-<p><img src="image%5C%E6%8D%95%E8%8E%B79.PNG" alt=""></p>
+<p><img src="image/%E6%8D%95%E8%8E%B79.PNG" alt=""></p>
 <h2 id="四、rabbitmq-的入门">四、RabbitMQ 的入门</h2>
 <h3 id="1、搭建项目环境">1、搭建项目环境</h3>
 <h4 id="1、添加rabbitmq坐标">1、添加RabbitMQ坐标</h4>
@@ -173,8 +173,8 @@ class SpringbootMqApplicationTests {
 </code></pre>
 <h2 id="五、rabbitmq原理">五、RabbitMQ原理</h2>
 <h3 id="51、rabbitmq原理图">5.1、RabbitMQ原理图</h3>
-<p><img src="image%5C%E6%8D%95%E8%8E%B712.PNG" alt=""></p>
-<p><img src="image%5C%E6%8D%95%E8%8E%B713.PNG" alt=""></p>
+<p><img src="image/%E6%8D%95%E8%8E%B712.PNG" alt=""></p>
+<p><img src="image/%E6%8D%95%E8%8E%B713.PNG" alt=""></p>
 <h3 id="52、名词解释">5.2、名词解释</h3>
 <h4 id="1、message">1、Message</h4>
 <p>指消息，消息是不具名的， 它由消息头消息体组成。 消息体是不透明的， 而消息头则由 一系列可选属性组成， 这些属性包括： routing-key(路由键)、 priority(相对于其他消息的优先 权)、 delivery-mode(指出消息可能持久性存储)等。</p>
@@ -221,7 +221,7 @@ class SpringbootMqApplicationTests {
 <p>1、微服务产生的日志，交给日志服务器处理</p>
 <p>2、日志处理服务器有4个服务，分别为DEBUG、INFO、WARN、ERROR</p>
 <p>3.服务直接的通信采用direct（发布与订阅完全匹配)  </p>
-<p><img src="image%5C%E6%8D%95%E8%8E%B7123.PNG" alt=""></p>
+<p><img src="image/%E6%8D%95%E8%8E%B7123.PNG" alt=""></p>
 <h4 id="2、编码实现">2、编码实现</h4>
 <h5 id="1、编写consumer">1、编写Consumer</h5>
 <h6 id="1、修改-consumer-的全局配置文件">1、修改 Consumer 的全局配置文件</h6>
@@ -349,7 +349,7 @@ class SpringbootMqProviderApplicationTests {
 </code></pre>
 <h3 id="2、topic交换器">2、Topic交换器</h3>
 <h4 id="1、需求-1">1、需求</h4>
-<p><img src="image%5C%E6%8D%95%E8%8E%B754.PNG" alt=""></p>
+<p><img src="image/%E6%8D%95%E8%8E%B754.PNG" alt=""></p>
 <h4 id="2、编码实现-1">2、编码实现</h4>
 <h5 id="1、编写provider">1、编写Provider</h5>
 <h6 id="1、修改provider全局配置文件">1、修改Provider全局配置文件</h6>
