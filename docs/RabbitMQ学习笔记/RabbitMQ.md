@@ -125,13 +125,13 @@ http://serverip:15672
 
 其中serverip是RabbitMQ-Server所在主机的ip
 
-## 三、为什么要使用 RabbitMQ？ 他解决了什么问题？  
+## 三、 RabbitMQ  应用场景
 
-### 1、同步变异步
+### 1、异步处理
 
 ![](image/捕获6.PNG)
 
-### 2、解耦
+### 2、应用解耦
 
 ![](image/捕获7.PNG)
 
@@ -747,5 +747,260 @@ public class SpringbootMqProviderApplicationTests {
         this.ordersender.send("OrderSender...");
     }
 }
+```
+
+### 3、Fanout 交换器  
+
+#### 1、需求
+
+![](image/捕获123456.PNG)
+
+#### 2、编码实现
+
+##### 1、编写Consumer
+
+###### 1、修改Consumer全局配置文件
+
+```properties
+spring.application.name=springcloud-mq
+spring.rabbitmq.host=192.168.40.133
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=yyh
+spring.rabbitmq.password=123456
+#设置交换器的名称
+mq.config.exchange=order.fanout
+#短信服务队列名称
+mq.config.queue.sms=order.sms
+#push 服务队列名称
+mq.config.queue.push=order.push
+```
+
+###### 2、SmsReceiver
+
+```java
+/**
+ * 消息接收者
+ * @author Administrator
+ * @RabbitListener bindings:绑定队列
+ * @QueueBinding value:绑定队列的名称
+ * exchange:配置交换器
+ * key:路由键
+ * @Queue value:配置队列名称
+ * autoDelete:是否是一个可删除的临时队列
+ * @Exchange value:为交换器起个名称
+ * type:指定具体的交换器类型
+ */
+@Component
+@RabbitListener(
+    bindings=@QueueBinding(
+        value=@Queue(value="${mq.config.queue.sms}",autoDelete="true"),
+        exchange=@Exchange(value="${mq.config.exchange}",type= ExchangeTypes.FANOUT)
+    )
+)
+public class SmsReceiver {
+    /**
+     * 接收消息的方法。 采用消息队列监听机制
+     * @param msg
+     */
+    @RabbitHandler
+    public void process(String msg){
+        System.out.println("Sms...receiver: "+msg);
+    }
+}
+
+```
+
+###### 3、PushReceiver
+
+```java
+/**
+ * 消息接收者
+ * @author Administrator
+ * @RabbitListener bindings:绑定队列
+ * @QueueBinding value:绑定队列的名称
+ * exchange:配置交换器
+ * @Queue value:配置队列名称
+ * autoDelete:是否是一个可删除的临时队列
+ * @Exchange value:为交换器起个名称
+ * type:指定具体的交换器类型
+ */
+@Component
+@RabbitListener(
+    bindings=@QueueBinding(
+        value=@Queue(value="${mq.config.queue.push}",autoDelete="true"),
+        exchange=@Exchange(value="${mq.config.exchange}",type= ExchangeTypes.FANOUT)
+    )
+)
+public class PushReceiver {
+    /**
+     * 接收消息的方法。 采用消息队列监听机制
+     * @param msg
+     */
+    @RabbitHandler
+    public void process(String msg){
+        System.out.println("Push...receiver: "+msg);
+    }
+}
+
+```
+
+##### 2、编写Provider
+
+###### 1、修改Provider全局配置文件
+
+```properties
+spring.application.name=springcloud-mq
+spring.rabbitmq.host=192.168.40.133
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=yyh
+spring.rabbitmq.password=123456
+#设置交换器的名称
+mq.config.exchange=order.fanout
+```
+
+###### 2、Sender
+
+```java
+@Component
+public class Sender {
+
+    @Autowired
+    private AmqpTemplate rabbitAmqpTemplate;
+
+    //exchange 交换器名称
+    @Value("${mq.config.exchange}")
+    private String exchange;
+
+    public void send(String msg){
+        //向消息队列发送消息
+        //参数一： 交换器名称。
+        //参数二： 路由键
+        //参数三： 消息
+        this.rabbitAmqpTemplate.convertAndSend(this.exchange, "", msg);
+    }
+}
+
+```
+
+##### 3、测试
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes=SpringbootMqProviderApplication.class)
+public class SpringbootMqProviderApplicationTests {
+    @Autowired
+    private Sender sender;
+
+    /*
+     * 测试消息队列
+     */
+    @Test
+    public void test(){
+        this.sender.send("Hello RabbitMQ");
+    }
+}
+```
+
+## 七、RabbitMQ 实现松耦合
+
+### 1、需求
+
+![](image/捕获55.PNG)
+
+在讲解Fanout交换器时的例子上增加红包服务，这时不需要修改订单服务这边的代码，而只需增加红包服务对应的队列即可，这样能很好地实现松耦合设计
+
+### 2、代码实现
+
+#### 1、修改Consumer全局配置文件
+
+```properties
+spring.rabbitmq.host=192.168.40.133
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=yyh
+spring.rabbitmq.password=123456
+#设置交换器的名称
+mq.config.exchange=order.fanout
+#短信服务队列名称
+mq.config.queue.sms=order.sms
+#push 服务队列名称
+mq.config.queue.push=order.push
+#红包服务队列名称
+mq.config.queue.red=order.red
+```
+
+2、增加RedReceiver类
+
+```java
+/**
+ * 消息接收者
+ * @author Administrator
+ * @RabbitListener bindings:绑定队列
+ * @QueueBinding value:绑定队列的名称
+ * exchange:配置交换器* key:路由键
+ * @Queue value:配置队列名称
+ * autoDelete:是否是一个可删除的临时队列
+ * @Exchange value:为交换器起个名称
+ * type:指定具体的交换器类型
+ */
+@Component
+@RabbitListener(
+    bindings=@QueueBinding(
+        value=@Queue(value="${mq.config.queue.red}",autoDelete="true"),
+        exchange=@Exchange(value="${mq.config.exchange}",type= ExchangeTypes.FANOUT)
+    )
+)
+public class RedReceiver {
+    @RabbitHandler
+    public void process(String msg){
+        System.out.println("red...receiver: "+msg);
+    }
+}
+```
+
+## 八、RabbitMQ 消息处理  
+
+### 1、RabbitMQ 的消息持久化处理  
+
+消息的可靠性是 RabbitMQ 的一大特色， 那么 RabbitMQ 是如何保证消息可靠性的呢——消息持久化。  
+
+### 2、autoDelete 属性
+
+@Queue: 当所有消费客户端连接断开后， 是否自动删除队列 
+
+true： 删除 false： 不删除
+@Exchange： 当所有绑定队列都不在使用时， 是否自动删除交换器 
+
+true： 删除 false： 不删除  
+
+### 3、RabbitMQ 中的消息确认 ACK 机制  
+
+#### 1、什么是消息确认ACK?
+
+如果在处理消息的过程中，消费者的服务器在处理消息时出现异常，那可能这条正在处理的消息就没有完成消息消费，数据就会丢失。为了确保数据不会丢失，RabbitMQ支持消息确认-ACK.。
+
+#### 2、ACK的消息确认机制
+
+ACK机制是消费者从RabbitQ收到消息并处理完成后，反馈给RabbitMQ，RabbitMQ收到反馈后才将此消息从队列中删除。
+
+1、如果一个消费者在处理消息出现了网络不稳定、服务器异常等现象，那么就不会有ACK反馈，RabbitMQ会认为这个消息没有正常消费，会将消息重新放入队列中。
+
+2、如果在集群的情况下，RabbitMQ会立即将这个消息推送给在线的其他消费者，这种机制保证了在消费者服务端故障的时候，不丢失任何消息和任务。
+
+3、消息永远不会从RabbitMQ中删除，只有当消费者正确发送ACK反馈，RabbitMQ确认收到后，消息才会从RabbitMQ服务器的数据中删除。
+
+4、消息的ACK确认机制默认是打开的。
+
+#### 3、ACK 反馈问题  
+
+如果忘记了ACK，那么后果是很严重，当Consumer退出时，Message会一直重新分发，然后RabbitMQ会占用越来越多的内存，由于RabbitMQ会长时间运行，因此这个“内存泄漏”是致命的。
+
+
+#### 4、修改 Consusmer全局 配置文件解决 ACK 反馈问题  
+
+```properties
+#开启重试
+spring.rabbitmq.listener.retry.enabled=true
+#重试次数,默认为 3 次
+spring.rabbitmq.listener.retry.max-attempts=5
 ```
 
